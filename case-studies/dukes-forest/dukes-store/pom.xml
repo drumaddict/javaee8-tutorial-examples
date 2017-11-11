@@ -53,17 +53,20 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <skip>false</skip>
-                    <executable>${glassfish.home}/bin/asadmin${glassfish.executables.suffix}</executable>
+                    <skip>true</skip>
+                    <!-- <executable>${glassfish.home}/bin/asadmin${glassfish.executables.suffix}</executable> -->
+                    <!-- <executable>${glassfish.home}/glassfish/bin/asadmin</executable> -->
+                    <executable>/opt/glassfish5/glassfish/bin/asadmin</executable>
+                    <!-- <executable>/kolos</executable> -->
                     <arguments>
                         <argument>set</argument>
                         <argument>server.security-service.activate-default-principal-to-role-mapping=true</argument>
                         <argument>server.http-service.sso-enabled=true</argument>
                     </arguments>
                 </configuration>
-            </plugin>          
+            </plugin>
         </plugins>
-        
+
     </build>
 
 </project>

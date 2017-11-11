@@ -62,13 +62,16 @@
                             <goal>exec</goal>
                         </goals>
                         <configuration>
-                            <executable>${glassfish.home}/bin/asadmin${glassfish.executables.suffix}</executable>
+                            <!-- <executable>${glassfish.home}/bin/asadmin${glassfish.executables.suffix}</executable> -->
+                            <executable>${glassfish.home}/glassfish/bin/asadmin</executable>
                             <!-- optional -->
                             <arguments>
                                 <argument>get-client-stubs</argument>
                                 <argument>--appname</argument>
                                 <argument>${project.build.finalName}</argument>
                                 <argument>./target</argument>
+                                <argument>--user=admin</argument>
+                                <argument>--passwordfile=/opt/glassfish5/glassfish/domains/password.properties</argument>
                             </arguments>
                         </configuration>
                     </execution>

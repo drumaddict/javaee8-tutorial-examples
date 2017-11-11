@@ -11,10 +11,10 @@
     <version>8.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Java EE Tutorial Examples</name>
-    
+
     <scm>
         <connection>scm:git:https://github.com/javaee/tutorial-examples.git</connection>
-        <developerConnection>scm:git:git@github.com:javaee/tutorial-examples.git</developerConnection>     
+        <developerConnection>scm:git:git@github.com:javaee/tutorial-examples.git</developerConnection>
     <tag>HEAD</tag>
   </scm>
     <issueManagement>
@@ -39,17 +39,17 @@
         <maven.exec.plugin.version>1.2.1</maven.exec.plugin.version>
         <junit.version>4.11</junit.version>
         <eclipselink.version>2.5.0</eclipselink.version>
-        <glassfish.embedded.version>4.0</glassfish.embedded.version>
-        <cargo.plugin.version>1.4.4</cargo.plugin.version>
+        <glassfish.embedded.version>5.0</glassfish.embedded.version>
+        <cargo.plugin.version>1.6.4</cargo.plugin.version>
         <glassfish.domain.name>domain1</glassfish.domain.name>
-        <glassfish.home>${glassfish.home.prefix}/glassfish5</glassfish.home>
-        <integration.container.id>glassfish5x</integration.container.id>
+        <glassfish.home>/opt/glassfish5</glassfish.home>
+        <integration.container.id>glassfish4x</integration.container.id>
         <maven.deploy.skip>true</maven.deploy.skip>
         <maven.javadoc.skip>true</maven.javadoc.skip>
         <maven.source.skip>true</maven.source.skip>
         <maven.source.attach>false</maven.source.attach>
     </properties>
-    
+
     <profiles>
         <profile>
             <id>windows</id>
@@ -71,8 +71,9 @@
                 </os>
             </activation>
             <properties>
-                <glassfish.home.prefix>${user.home}</glassfish.home.prefix>
+                <!-- <glassfish.home.prefix>${user.home}</glassfish.home.prefix> -->
                 <glassfish.executables.suffix />
+                <glassfish.executables.prefix />
             </properties>
         </profile>
         <profile>
@@ -92,18 +93,20 @@
                 </file>
             </activation>
             <properties>
-                <glassfish.home>${glassfish.home.prefix}/glassfish5</glassfish.home>
+                <!-- <glassfish.home>${glassfish.home.prefix}/glassfish5</glassfish.home> -->
+                <glassfish.home>/opt/glassfish5</glassfish.home>
             </properties>
         </profile>
         <profile>
             <id>standalone</id>
             <properties>
-                <glassfish.home>${basedir}/target/cargo/installs/glassfish</glassfish.home>
+                <!-- <glassfish.home>${basedir}/target/cargo/installs/glassfish</glassfish.home> -->
+                <glassfish.home>/opt/glassfish5</glassfish.home>
                 <cargo.maven.containerUrl>http://dlc.sun.com.edgesuite.net/glassfish/4.0/promoted/latest-glassfish.zip</cargo.maven.containerUrl>
             </properties>
         </profile>
     </profiles>
-    
+
     <modules>
         <module>archetypes</module>
         <module>batch</module>
@@ -119,7 +122,7 @@
         <module>security</module>
         <module>web</module>
     </modules>
-    
+
     <repositories>
         <repository>
             <id>snapshot-repository.java.net</id>
@@ -134,7 +137,7 @@
             <layout>default</layout>
         </repository>
     </repositories>
-    
+
     <build>
         <pluginManagement>
             <plugins>
@@ -166,36 +169,36 @@
             </plugins>
         </pluginManagement>
         <plugins>
-            <plugin>
-                <groupId>org.codehaus.cargo</groupId>
-                <artifactId>cargo-maven2-plugin</artifactId>
-                <inherited>true</inherited>
-                <executions>
-                    <execution>
-                        <id>deploy</id>
-                        <phase>integration-test</phase>
-                        <goals>
-                            <goal>redeploy</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <container>
-                        <containerId>${integration.container.id}</containerId>
-                        <type>installed</type>
-                        <home>${glassfish.home}</home>
-                    </container>
-                    <configuration>
-                        <type>existing</type>
-                        <home>${glassfish.home}/glassfish/domains</home>
-                        <properties>
-                            <cargo.glassfish.domain.name>${glassfish.domain.name}</cargo.glassfish.domain.name>
-                            <!--cargo.remote.username></cargo.remote.username-->
-                            <cargo.remote.password />
-                        </properties>
-                    </configuration>
-                </configuration>
-            </plugin>
+            <!-- <plugin> -->
+            <!--     <groupId>org.codehaus.cargo</groupId> -->
+            <!--     <artifactId>cargo-maven2-plugin</artifactId> -->
+            <!--     <inherited>true</inherited> -->
+            <!--     <executions> -->
+            <!--         <execution> -->
+            <!--             <id>deploy</id> -->
+            <!--             <phase>integration-test</phase> -->
+            <!--             <goals> -->
+            <!--                 <goal>redeploy</goal> -->
+            <!--             </goals> -->
+            <!--         </execution> -->
+            <!--     </executions> -->
+            <!--     <configuration> -->
+            <!--         <container> -->
+            <!--             <containerId>${integration.container.id}</containerId> -->
+            <!--             <type>installed</type> -->
+            <!--             <home>${glassfish.home}</home> -->
+            <!--         </container> -->
+            <!--         <configuration> -->
+            <!--             <type>existing</type> -->
+            <!--             <home>${glassfish.home}/glassfish/domains</home> -->
+            <!--             <properties> -->
+            <!--                 <cargo.glassfish.domain.name>${glassfish.domain.name}</cargo.glassfish.domain.name> -->
+            <!--                 <cargo.remote.username></cargo.remote.username> -->
+            <!--                 <cargo.remote.password /> -->
+            <!--             </properties> -->
+            <!--         </configuration> -->
+            <!--     </configuration> -->
+            <!-- </plugin> -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -224,10 +227,10 @@
             </plugin>
             <plugin>
                 <artifactId>maven-release-plugin</artifactId>
-                <version>${maven.release.plugin.version}</version>                
+                <version>${maven.release.plugin.version}</version>
                 <configuration>
                     <mavenExecutorId>forked-path</mavenExecutorId>
-                    <useReleaseProfile>false</useReleaseProfile>                    
+                    <useReleaseProfile>false</useReleaseProfile>
                     <arguments>${release.arguments}</arguments>
                     <autoVersionSubmodules>true</autoVersionSubmodules>
                     <tagNameFormat>@{project.version}</tagNameFormat>
@@ -242,8 +245,8 @@
             </plugin>
         </plugins>
     </build>
-    
-    
+
+
     <dependencies>
         <dependency>
             <groupId>javax</groupId>
