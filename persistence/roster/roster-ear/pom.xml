@@ -42,7 +42,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <addClasspath>true</addClasspath>                      
+                            <addClasspath>true</addClasspath>
                             <mainClass>javaeetutorial.roster.client.RosterClient</mainClass>
                         </manifest>
                     </archive>
@@ -67,6 +67,8 @@
                                 <argument>--appname</argument>
                                 <argument>${project.build.finalName}</argument>
                                 <argument>./target</argument>
+                                <argument>--user=admin</argument>
+                                <argument>--passwordfile=/opt/glassfish5/glassfish/domains/password.properties</argument>
                             </arguments>
                         </configuration>
                     </execution>
